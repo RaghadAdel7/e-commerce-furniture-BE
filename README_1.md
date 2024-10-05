@@ -4,12 +4,13 @@
 
 This is a comprehensive backend system solution for an e-commerce website that specializes in selling furniture. The system provide a managable infrastructure that deal with most aspects of the online e-commerce operations, such as product catalog managemnt, order processing..etc.
 
+
 ## Product Dsiplay Structure 
 The back-end system features a multi-level product catalog that organizes the furniture inventory. At the top are broad product categories, such as Bedroom and Living Room.
 
-Within each primary category, there are more granular subcategories ,for example, the Bedroom category contains subcategories like Beds, Dressers, and Nightstands.
+Within each primary category, there are more granular subcategories. For example, the Bedroom category contains subcategories like Beds, Dressers, and Nightstands.
 
-Housed under these subcategories are the individual product listings. So the Beds subcategory in Bedroom would include specific items like King Bed, single bed, and Kids bed, each with their own detailed information
+Housed under these subcategories are the individual product listings. So the Beds subcategory in Bedroom Category would include specific items like King Bed, Single Bed, and Kids bed, each with their own detailed information
 (Categories -> Subcategories -> Individual Products).
 
 This hierarchical structure allows customers to easily navigate the catalog, drill down into specific product types, and find the exact furniture pieces they need. The backend seamlessly manages this taxonomy of categories, subcategories, and individual products.

@@ -61,7 +61,7 @@ namespace src.Controller
             return Ok(updatedSubCategory);
         }
 
-        // Delete a subcategory using it id
+        // Delete a subcategory using its id
         [Authorize(Roles = "Admin")]
         [HttpDelete("{subCategoryId}")] 
         public async Task<IActionResult> DeleteSubCategory( Guid subCategoryId)
@@ -88,7 +88,7 @@ namespace src.Controller
             return Ok(await _productService.GetProductByIdAsync(productId));
         }
 
-        // Add a product under a subcategory
+        // Add products under a subcategory
         [Authorize(Roles = "Admin")] 
         [HttpPost("{subCategoryId}/products")] 
         public async Task<ActionResult<GetProductDto>> CreateProductAsync(Guid subCategoryId, [FromBody] CreateProductDto productDto)

@@ -72,7 +72,7 @@ namespace src.Services.Category
                 throw CustomException.NotFound($"Category with Id: {id} is not found");
             }
             
-            return await _categoryRepo.DeleteOneAsync(foundCategory); // Proceed to delete
+            return await _categoryRepo.DeleteOneAsync(foundCategory);
         } 
     }
 }
