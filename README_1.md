@@ -38,8 +38,11 @@ This hierarchical structure allows customers to easily navigate the catalog, dri
    - The search results highlight the products whose detailed descriptions best align with the user's search query.
 
 
-
 - **Order Management**:
+  - Create new order.
+  - Retrieve all pending and completed orders included with pagination.
+  - Update current order status along with its shipping date.
+  - Cancel order depending in its status. 
 
 - **SubCategory**
   - Search Subcategories with Pagination.
@@ -184,7 +187,13 @@ The API will be available at: `http://localhost:5228`
 **DELETE** `/api/v1/coupons/{id}` - Delete a coupon by ID.
 
 ### Order 
-
+- **POST** `/api/v1/Orders/checkout` - Create a new order.
+- **GET** `/api/v1/Orders` - Retrieve an specific order by ID.
+- **GET** `/api/v1/Orders/{orderid}` - Retrieve all orders.
+- **GET** `/api/v1/Orders/user/{userid}` - Retrieve all pending orders from a specific user ID.
+- **GET** `/api/v1/Orders/user/{userid}/ordershistory` - Retrieve all delivered orders from a specific user ID.
+- **PUT** `/api/v1/Orders/{orderid}` - Update an order by ID.
+- **DELETE** `/api/v1/Orders/{orderid}` - Delete an order by ID.
 ### Review 
 
 

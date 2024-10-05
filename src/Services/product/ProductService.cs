@@ -121,9 +121,9 @@ namespace src.Services.product
         }
 
         //get all products by using the search by name & pagination & filer & sort
-        public async Task<List<GetProductDto>> GetAllAsync(SearchProcess to_search)
+        public async Task<List<GetProductDto>> GetAllAsync(SearchProcess to_search,Guid? SubCategoryId=null)
         {
-            var productsList = await _productRepository.GetAllAsync(to_search);
+            var productsList = await _productRepository.GetAllAsync(to_search,SubCategoryId);
             return _mapper.Map<List<Product>, List<GetProductDto>>(productsList);
         }
 

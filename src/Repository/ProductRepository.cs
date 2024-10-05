@@ -120,13 +120,26 @@ namespace src.Repository
         }
 
         //get all products by using the search by name & pagination & filer & sort
-        public async Task<List<Product>> GetAllAsync(SearchProcess to_search)
+        public async Task<List<Product>> GetAllAsync(
+            SearchProcess to_search,
+            Guid? SubCategoryId = null
+        )
         {
-            //implement search
             var search_result = _products.Where(x =>
                 x.ProductName.ToLower().Contains(to_search.Search.ToLower())
                 || x.Description.ToLower().Contains(to_search.Search.ToLower())
             );
+
+            //implement search
+            if (SubCategoryId != null)
+            {
+                search_result = _products.Where(x =>
+                    (
+                        x.ProductName.ToLower().Contains(to_search.Search.ToLower())
+                        || x.Description.ToLower().Contains(to_search.Search.ToLower())
+                    ) && x.SubCategoryId.Equals(SubCategoryId)
+                );
+            }
 
             //implement filter
             IQueryable<Product> query = search_result;

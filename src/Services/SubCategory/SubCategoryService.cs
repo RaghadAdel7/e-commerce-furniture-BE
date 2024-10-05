@@ -70,6 +70,7 @@ namespace src.Services.SubCategory
                     SKU = product.SKU,
                     ProductPrice = product.ProductPrice,
                     Weight = product.Weight,
+                    AverageRating=product.AverageRating,
                     SubCategoryId = product.SubCategoryId,
                     SubCategoryName= product.SubCategoryName
                 }).ToList()

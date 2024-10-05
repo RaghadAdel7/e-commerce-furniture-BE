@@ -24,7 +24,7 @@ namespace src.Services.product
         Task<List<GetProductDto>> GetAllBySortAsync(SortOptions sortOption);
 
         //get all products by using the search by name & pagination & filer & sort
-        Task<List<GetProductDto>> GetAllAsync(SearchProcess to_search);
+        Task<List<GetProductDto>> GetAllAsync(SearchProcess to_search,Guid? SubCategoryId=null);
 
         //get product by id
         Task<GetProductDto> GetProductByIdAsync(Guid id);
