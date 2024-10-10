@@ -1,52 +1,239 @@
-# E-commerce Application API
+# E-commerce Backend Project
 
-This repository contains ASP.NET Core application with RESTful API endpoints for e-commerce application. The API allows you to interact with products in the store.
+## Project Overview
 
-`This is a teamwork assignment where you will work as a team within your group`
+This is a comprehensive backend system solution for an e-commerce website that specializing in furniture sales. The system provides a scalable and manageable infrastructure that handles essential aspects
+of e-commerce operations, including product catalog management, order processing,payment handling, and more.
 
-**_DEADLINE: 06.10.2024_**
+## Product Display Structure
 
-## How to work
+The back-end system organizes the furniture inventory into a multi-level product catalog. At the top level are broad product categories, such as Bedroom and Living Room.
 
-1. One team member (admin) should fork the repo and add other members to that admin repo as collaborators.
-2. The other team members should fork then clone the forked repo (the admin repo).
-3. Any change/update made should be submitted to admin repo as pull request.
-4. Each change should be done in a separate pull request.
-5. Pull request must be reviewed by at least 2 members before merged to admin repo.
-6. Admin should open a PR to the original (Integrify) repo.
+Within each primary category, there are granular subcategories. For instance, the Bedroom category includes subcategories like Beds, Dressers, and Nightstands.
 
-Please ask your instructor or supporting instructor if you have any questions or need help.
+Each subcategory houses individual product listings. For example, under the Beds subcategory, you'll find specific items like King Bed, Single Bed, and Kids Bed, each with its own detailed information such as price,and weight.
 
-## Level 1: Basic Requirements
+**(Categories -> Subcategories -> Individual Products).**
 
-In this level, the application includes the following features:
+This hierarchical structure allows customers to easily navigate the catalog and find the exact furniture pieces they need. The backend efficiently manages this taxonomy, ensuring fast access and seamless updates to categories, subcategories, and products.
 
-1. Identify Entities: Identify the main entities that need to be stored in the database. These could include customers, products, categories, orders, etc.
-2. Define Attributes: For each entity, list and define the attributes or properties associated with it. For example, for a "customer" entity, attributes might include "id," "firstName," "lastName," "email" and so on.
-3. Establish Relationships: Determine the relationships between entities. Relationships can be one-to-one, one-to-many, or many-to-many. For instance, in an E-commerce system, a "customer" may have multiple "orders".
-4. Key: When establishing relationships, remember to create a key in your ERD to explain the notation used for relationships.
-5. According to the ERD above, create the entities, and build the database with Entity Framework Core. Add ERD in screenshots folders
-6. Create basic CRUD operations for each endpoint.
-7. Use authentication and role-based authorization
+## Features
 
-## Level 2: Additional Requirements
+- **User Management**
 
-In addition to the basic requirements, the application enhances its functionality with the following features:
+  - Create new user
+  - User authentication with JWT token
+  - Role-based access control (Admin, Customer)
+  - Display all users
+  - Display specific user
+  - Update user information
+  - Check for user Username , Email and phone number
+  - Check null values
+  - Delete specific user
 
-1. Include pagination functionality to the method getting all products.
-2. Implement search functionality to allow users to search for specific products based on keywords or specific fields (e.g., by title).
-3. Add validation checks to ensure the data meets certain criteria before executing the actions.
+- **Product Management**:
 
-## Level 3: Advanced Requirements
+  - Products can be searched by its names.
+  - Products can be filtered based on price range , color , and product name.
+  - Products can be sorted based on the added date (New Arrivals) , SKU (low stock) , and Price.
+  - The search results highlight the products whose detailed descriptions best align with the user's search query.
 
-If you have a higher skill level and finish the previous requirements before the deadline, you can tackle the following bonus tasks:
+- **Order Management**:
 
-1. Refactor method getting all products to also handle query parameters for filtering and sorting products based on specific criteria (e.g., price range, by title, by date, etc). Pagination still need to be integrated.
-2. Use claim-based or resource-based where applicable.
-3. Peer Review:
-   - Review 2 assignments from other teams.
-   - Provide constructive feedback and suggestions for improvement.
+  - Create new order.
+  - Retrieve all pending and completed orders included with pagination.
+  - Update current order status along with its shipping date.
+  - Cancel order depending in its status.
 
-`Please note that the bonus requirements and reviews are optional and can be completed if you have additional time and advanced skills.`
+- **SubCategory**
 
-Happy coding!
+  - Search Subcategories with Pagination.
+  - Retrieve all Products within a Subcategory.
+  - Add/Update/Delete Products within a Subcategory.
+
+- **Payment**
+
+  - Adding a payment with active coupon(isActive: true).
+  - Adding a payment with inactive coupon(isActive: false). (e.g. using outdated/wrong coupon)
+
+- **Cart**
+
+  - Using Cart Details to improve the management of the products details inside the carts.
+  - Automatically calculate the subtotal of every product inside the carts.
+  - Automatically calculate the price of the carts.
+
+- **Review**
+
+  - The user can post a review with or without a comment, but it must include a ratting.
+  - Automatically update the average rating result of each product when a new review is posted.
+
+## Technologies Used
+
+- **.Net 8**: Web API Framework
+- **Entity Framework Core**: ORM for database interactions
+- **PostgreSQl**: Relational database for storing data
+- **JWT**: For user authentication and authorization
+- **AutoMapper**: For object mapping
+- **Swagger**: API documentation
+
+## Prerequisites
+
+- .Net 8 SDK
+- SQL Server
+- VSCode
+
+## Getting Started
+
+### 1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/e-commerce-backend.git
+```
+
+### 2. Setup database
+
+- Make sure PostgreSQL Server is running
+- Create `appsettings.json` file
+- Update the connection string in `appsettings.json`
+
+```json
+{
+  "ConnectionStrings": {
+    "Local": "Server=localhost;Database=ECommerceDb;User Id=your_username;Password=your_password;"
+  }
+}
+```
+
+- Run migrations to create database
+
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+- Run the application
+
+```bash
+dotnet watch
+```
+
+The API will be available at: `http://localhost:5228`
+
+### Swagger
+
+- Navigate to `http://localhost:5228/swagger/index.html` to explore the API endpoints.
+
+## Project structure
+
+```bash
+|-- Controllers # API controllers with request and response
+|-- Database # DbContext and Database Configurations
+|-- DTOs # Data Transfer Objects
+|-- Entities # Database Entities (User, Product, Category, Order)
+|-- Middleware # Logging request, response and Error Handler
+|-- Repositories # Repository Layer for database operations
+|-- Services # Business Logic Layer
+|-- Utils # Common logics
+|-- Migrations # Entity Framework Migrations
+|-- Program.cs # Application Entry Point
+```
+
+## API Endpoints
+
+### User
+
+- **POST** `/api/v1/users` – Create a new user.
+- **POST** `/api/v1/users/signIn` – User login and retrieve JWT token.
+- **GET** `/api/v1/users` – Retrieve all users.
+- **GET** `/api/v1/users/{id}` – Retrieve a specific user by ID.
+- **PUT** `/api/v1/users/{id}` – Update user information by ID.
+- **DELETE** `/api/v1/users/{id}` – Delete a user by ID.
+
+### Category
+
+- **POST** `/api/v1/categories` – Create a new category.
+- **GET** `/api/v1/categories` – Retrieve all categories.
+- **GET** `/api/v1/categories/{id}` – Retrieve a specific category by ID.
+- **PUT** `/api/v1/categories/{id}` – Update category by ID.
+- **DELETE** `/api/v1/categories/{id}` – Delete a category by ID.
+
+### Subcategory
+
+- **POST** `/api/v1/subcategories` – Create a new subcategory.
+- **POST** `/api/v1/subcategories/{subCategoryId}/products` – Add a new product to a subcategory.
+- **GET** `/api/v1/subcategories` – Retrieve all subcategories including its products.
+- **GET** `/api/v1/subcategories/{id}` – Retrieve a specific subcategory by ID.
+- **GET** `/api/v1/subcategories/products` – Retrieve all products in all subcategories with optional sorting, filtering, searching, and pagination.
+- **GET** `/api/v1/subcategories/{subCategoryId}/products` – Retrieve all products in specific subcategory with optional sorting, filtering, searching, and pagination.
+- **GET** `/api/v1/subcategories/products/{productId}` – Retrieve a specific product by ID within a subcategory.
+- **GET** `/api/v1/subcategories/search` – Search for subcategories with pagination.
+- **PUT** `/api/v1/subcategories/{subCategoryId}` – Update a subcategory by ID.
+- **PUT** `/api/v1/subcategories/products/{productId}` – Update a product by ID within a subcategory.
+- **DELETE** `/api/v1/subcategories/{subCategoryId}` – Delete a subcategory by ID.
+- **DELETE** `/api/v1/subcategories/products/{productId}` – Delete a product by ID within a subcategory.
+
+### Product
+
+- **POST** `/api/v1/products` – Create a new product.
+- **GET** `/api/v1/products` – Retrieve all products with optional sorting, filtering, searching, and pagination.
+- **GET** `/api/v1/products/{productId}` – Retrieve a specific product by ID.
+- **PUT** `/api/v1/products/{productId}` – Update a product by ID.
+- **DELETE** `/api/v1/products/{productId}` – Delete a product by ID.
+
+### Cart
+
+- **POST** `/api/v1/carts` – Create a new cart.
+- **GET** `/api/v1/carts` – Retrieve all carts.
+- **GET** `/api/v1/carts/{id}` – Retrieve a specific cart by ID.
+- **DELETE** `/api/v1/carts/{id}` – Delete a cart by ID.
+
+### Payment
+
+- **POST** `/api/v1/payments` – Create a new payment.
+- **GET** `/api/v1/payments/{paymentId}` – Retrieve a specific payment by ID.
+- **PUT** `/api/v1/payments/{paymentId}` – Update a payment by ID.
+- **DELETE** `/api/v1/payments/{paymentId}` – Delete a payment by ID.
+
+### Coupon
+
+- **POST** `/api/v1/coupons` – Create a new coupon.
+- **GET** `/api/v1/coupons` – Retrieve all coupons.
+- **GET** `/api/v1/coupons/{id}` – Retrieve a specific coupon by ID.
+- **PUT** `/api/v1/coupons/{id}` – Update a coupon by ID.
+- **DELETE** `/api/v1/coupons/{id}` – Delete a coupon by ID.
+
+### Order
+
+- **POST** `/api/v1/orders/checkout` – Create a new order.
+- **GET** `/api/v1/orders` – Retrieve all orders.
+- **GET** `/api/v1/orders/{orderId}` – Retrieve a specific order by ID.
+- **GET** `/api/v1/orders/user/{userId}` – Retrieve all pending orders by user ID.
+- **GET** `/api/v1/orders/user/{userId}/orderHistory` – Retrieve delivered orders by user ID.
+- **PUT** `/api/v1/orders/{orderId}` – Update an order by ID.
+- **DELETE** `/api/v1/orders/{orderId}` – Delete an order by ID.
+
+### Review
+
+- **GET** `/api/v1/reviews` – Retrieve all reviews for all products.
+- **GET** `/api/v1/reviews/{id}` – Retrieve a specific review by ID.
+- **POST** `/api/v1/reviews` – Add a review to a product.
+- **PUT** `/api/v1/reviews/{id}` – Update a review by ID.
+- **DELETE** `/api/v1/reviews/{id}` – Delete a review by ID.
+
+---
+
+## Deployment
+
+The application is deployed and can be accessed at: [https://your-deploy-link.com](https://your-deploy-link.com)
+
+## Team Members
+
+- **Leader** : Talal Alqarni (@TalalMAlqarni )
+- **Member #1** : Abdulaziz Alsuhaibani (@ama47)
+- **Member #2** : Jomana Mahjoob (@wbznan4)
+- **Member #3** : Raghad Alessa (@RaghadAdel7)
+- **Member #4** : Razan Altowairqi (@razanmtw17)
+
+## License
+
+This project is licensed under the MIT License.

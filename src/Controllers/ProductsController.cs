@@ -21,7 +21,6 @@ namespace src.Controller
         }
 
         //get all products by using the search by name & pagination & filer & sort
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProducts(
             [FromQuery] SearchProcess to_search
@@ -32,7 +31,6 @@ namespace src.Controller
         }
 
         //get all products by using fiter feature
-        [AllowAnonymous]
         [HttpGet("filter")]
         public async Task<ActionResult<List<Product>>> FilterProducts(
             [FromQuery] FilterationOptions pf
@@ -43,7 +41,6 @@ namespace src.Controller
         }
 
         //get all products using the search by name & pagination
-        [AllowAnonymous]
         [HttpGet("search")]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProductsBySearch(
             [FromQuery] PaginationOptions paginationOptions
@@ -54,7 +51,6 @@ namespace src.Controller
         }
 
         //get all products by using sort feature
-        [AllowAnonymous]
         [HttpGet("sort")]
         public async Task<ActionResult<List<GetProductDto>>> GetAllBySort(
             [FromQuery] SortOptions sortOption

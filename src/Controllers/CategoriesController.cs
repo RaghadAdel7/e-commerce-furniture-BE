@@ -23,7 +23,6 @@ namespace src.Controller
         }
 
         // Get all categories with their details
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<CategoryReadDto>>> GetAllCategories()
         {
@@ -32,7 +31,6 @@ namespace src.Controller
         }
 
         // Get a category with its details
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryReadDto>> GetCategoryById(Guid id)
         {

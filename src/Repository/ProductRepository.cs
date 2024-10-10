@@ -121,22 +121,24 @@ namespace src.Repository
 
         //get all products by using the search by name & pagination & filer & sort
         public async Task<List<Product>> GetAllAsync(
-            SearchProcess to_search,
+            SearchProcess toSearch,
             Guid? SubCategoryId = null
         )
         {
+            //implement search
+            //all products in all subcategories
             var search_result = _products.Where(x =>
-                x.ProductName.ToLower().Contains(to_search.Search.ToLower())
-                || x.Description.ToLower().Contains(to_search.Search.ToLower())
+                x.ProductName.ToLower().Contains(toSearch.Search.ToLower())
+                || x.Description.ToLower().Contains(toSearch.Search.ToLower()) 
             );
 
-            //implement search
+            //or all products in specific subcategory:
             if (SubCategoryId != null)
             {
                 search_result = _products.Where(x =>
                     (
-                        x.ProductName.ToLower().Contains(to_search.Search.ToLower())
-                        || x.Description.ToLower().Contains(to_search.Search.ToLower())
+                        x.ProductName.ToLower().Contains(toSearch.Search.ToLower())
+                        || x.Description.ToLower().Contains(toSearch.Search.ToLower())
                     ) && x.SubCategoryId.Equals(SubCategoryId)
                 );
             }
@@ -144,54 +146,54 @@ namespace src.Repository
             //implement filter
             IQueryable<Product> query = search_result;
 
-            if (!string.IsNullOrEmpty(to_search.Name))
+            if (!string.IsNullOrEmpty(toSearch.Name))
             {
-                query = query.Where(x => x.ProductName.ToLower() == to_search.Name.ToLower());
+                query = query.Where(x => x.ProductName.ToLower() == toSearch.Name.ToLower());
             }
 
-            if (!string.IsNullOrEmpty(to_search.Color))
+            if (!string.IsNullOrEmpty(toSearch.Color)) 
             {
-                query = query.Where(x => x.ProductColor.ToLower() == to_search.Color.ToLower());
+                query = query.Where(x => x.ProductColor.ToLower() == toSearch.Color.ToLower());
             }
 
-            if (to_search.MinPrice.HasValue && to_search.MinPrice.Value > 0)
+            if (toSearch.MinPrice.HasValue && toSearch.MinPrice.Value > 0)
             {
-                query = query.Where(x => x.ProductPrice >= to_search.MinPrice.Value);
+                query = query.Where(x => x.ProductPrice >= toSearch.MinPrice.Value);
             }
 
-            if (to_search.MaxPrice.HasValue && to_search.MaxPrice.Value > 0)
+            if (toSearch.MaxPrice.HasValue && toSearch.MaxPrice.Value > 0)
             {
-                query = query.Where(x => x.ProductPrice <= to_search.MaxPrice.Value);
+                query = query.Where(x => x.ProductPrice <= toSearch.MaxPrice.Value);
             }
 
             //implement sort
-            if (!string.IsNullOrEmpty(to_search.SortBy))
+            if (!string.IsNullOrEmpty(toSearch.SortBy))
             {
-                if (to_search.SortBy.Equals("price", StringComparison.OrdinalIgnoreCase))
+                if (toSearch.SortBy.Equals("price", StringComparison.OrdinalIgnoreCase))
                 {
                     query =
-                        to_search.SortOrder == SortOrder.Descending
+                        toSearch.SortOrder == SortOrder.Descending
                             ? query.OrderByDescending(x => x.ProductPrice)
                             : query.OrderBy(x => x.ProductPrice);
                 }
-                else if (to_search.SortBy.Equals("sku", StringComparison.OrdinalIgnoreCase))
+                else if (toSearch.SortBy.Equals("sku", StringComparison.OrdinalIgnoreCase))
                 {
                     query =
-                        to_search.SortOrder == SortOrder.Descending
+                        toSearch.SortOrder == SortOrder.Descending
                             ? query.OrderByDescending(x => x.SKU)
                             : query.OrderBy(x => x.SKU);
                 }
-                else if (to_search.SortBy.Equals("rating", StringComparison.OrdinalIgnoreCase))
+                else if (toSearch.SortBy.Equals("rating", StringComparison.OrdinalIgnoreCase)) 
                 {
                     query =
-                        to_search.SortOrder == SortOrder.Descending
+                        toSearch.SortOrder == SortOrder.Descending
                             ? query.OrderByDescending(x => x.AverageRating)
                             : query.OrderBy(x => x.AverageRating);
                 }
-                else if (to_search.SortBy.Equals("date", StringComparison.OrdinalIgnoreCase))
+                else if (toSearch.SortBy.Equals("date", StringComparison.OrdinalIgnoreCase))
                 {
                     query =
-                        to_search.SortOrder == SortOrder.Descending
+                        toSearch.SortOrder == SortOrder.Descending
                             ? query.OrderByDescending(x => x.AddedDate)
                             : query.OrderBy(x => x.AddedDate);
                 }
@@ -199,7 +201,7 @@ namespace src.Repository
 
             //implement pagination
 
-            query = query.Skip(to_search.Offset).Take(to_search.Limit);
+            query = query.Skip(toSearch.Offset).Take(toSearch.Limit);
 
             return await query.ToListAsync();
         }

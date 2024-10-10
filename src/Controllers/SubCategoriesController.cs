@@ -27,7 +27,6 @@ namespace src.Controller
         }
 
         // Get all subcategories
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<SubCategoryCreateDto>>> GetAllAsync()
         {
@@ -36,7 +35,6 @@ namespace src.Controller
         }
 
         // Get a specific category by Id
-        [AllowAnonymous]
         [HttpGet("{subCategoryId}")]
         public async Task<ActionResult<SubCategoryReadDto>> GetSubCategoryByIdWithProductsAsync(
             [FromRoute] Guid subCategoryId
@@ -82,7 +80,6 @@ namespace src.Controller
         }
 
         //  View all the products inside subcategories
-        [AllowAnonymous]
         [HttpGet("products")]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProductsAsync(
             [FromQuery] SearchProcess to_search
@@ -93,7 +90,6 @@ namespace src.Controller
         }
 
         //veiw all prodcuts inside specific subcategory
-        [AllowAnonymous]
         [HttpGet("{subCategoryId}/products")]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProductsInSubcategoryAsync(
             Guid subCategoryId,
@@ -111,7 +107,6 @@ namespace src.Controller
         }
 
         // Get a product by its id inside a subcategory
-        [AllowAnonymous]
         [HttpGet("products/{productId}")]
         public async Task<ActionResult<GetProductDto>> GetProductById(Guid productId)
         {
@@ -157,7 +152,6 @@ namespace src.Controller
         }
 
         // Get all subcategories that match the search using pagination
-        [AllowAnonymous]
         [HttpGet("search")]
         public async Task<ActionResult<List<SubCategoryReadDto>>> GetAllSubCategpryBySearch(
             [FromQuery] PaginationOptions paginationOptions
