@@ -52,7 +52,7 @@ builder.Services.AddCors(options =>
                           policy =>
                           {
                               policy.WithOrigins("http://localhost:3000/",
-                                                  "https://furniture-app-fe.onrender.com/")
+                                                  "https://furniture-app-fe.onrender.com")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod()
                                                   .SetIsOriginAllowed((host)=> true)
