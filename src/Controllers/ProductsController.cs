@@ -20,13 +20,29 @@ namespace src.Controller
             _productService = productService;
         }
 
+//NEW ONE
+        // [HttpGet]
+        // public async Task<ActionResult<ProductListDto>> GetAllAsync([FromQuery] SearchProcess toSearch, Guid?SubCategoryId)
+        // {
+        //     var products = await _productService.GetAllAsync(toSearch,SubCategoryId);
+        //     var totalCount = await _productService.CountProductsAsync();
+
+        //     var response = new ProductListDto
+        //     {
+        //         Products = products,
+        //         TotalCount = totalCount
+        //     };
+
+        //     return Ok(response);
+        // } 
+
         //get all products by using the search by name & pagination & filer & sort
         [HttpGet]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProducts(
-            [FromQuery] SearchProcess to_search
+            [FromQuery] SearchProcess toSearch
         )
         {
-            var products = await _productService.GetAllAsync(to_search);
+            var products = await _productService.GetAllAsync(toSearch);
             return Ok(products);
         }
 
@@ -61,7 +77,6 @@ namespace src.Controller
         }
 
         //get product by id
-
         [HttpGet("{productId}")]
         public async Task<ActionResult<GetProductDto>> GetProductById(Guid productId)
         {

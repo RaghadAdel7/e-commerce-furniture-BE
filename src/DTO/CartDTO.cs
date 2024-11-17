@@ -9,6 +9,7 @@ namespace src.DTO
         {
             public Guid UserId { get; set; }
             public List<CartDetailsDto> CartDetails { get; set; }
+            // public User? User { get; set; }
         }
 
         public class CartDetailsDto
@@ -25,6 +26,7 @@ namespace src.DTO
             public List<CartDetails> CartDetails { get; set; }
             public int CartQuantity { get; set; }
             public decimal TotalPrice { get; set; }
+            
 
         }
 

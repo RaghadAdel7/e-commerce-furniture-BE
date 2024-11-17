@@ -31,8 +31,10 @@ namespace src.Repository
         public async Task<Cart?> GetCartByIdAsync(Guid id)
         {
             return await _dbContext.Cart
+                // .Include(uId => uId.User)
                 .Include(c => c.CartDetails)
                     .ThenInclude(cd => cd.Product)
+
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
@@ -63,13 +65,18 @@ namespace src.Repository
         //get all carts
         public async Task<List<Cart>> GetAllCartsAsync()
         {
-            return await _dbContext.Cart.Include(c => c.CartDetails).ThenInclude(cd => cd.Product).ToListAsync();
+            return await _dbContext.Cart                
+            // .Include(uId => uId.User)
+            .Include(c => c.CartDetails)
+            .ThenInclude(cd => cd.Product).ToListAsync();
         }
 
         //get product by id to use in cart
         public async Task<Product?> GetProductByIdForCartAsync(Guid productId)
         {
-            return await _dbContext.Product.FindAsync(productId);
+            return await _dbContext.Product
+        
+            .FindAsync(productId);
         }
     }
 }

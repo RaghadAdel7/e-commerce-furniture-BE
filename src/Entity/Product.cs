@@ -14,7 +14,7 @@ namespace src.Entity
 
         public DateTime AddedDate {get;set;} = DateTime.UtcNow; // An error will occur in post man if the timestamp not in utc
 
-        //public string? ProductImage { get; set; } , It will be added during front-end 
+        public string? ProductImage { get; set; } // It will be added during front-end 
 
         public string? ProductColor { get; set; }
 

@@ -37,6 +37,8 @@ namespace src.DTO
             public DateOnly BirthDate { get; set; }
             public UserRole Role { get; set; }
             public Guid CartId { get; set; }
+            // public Cart? Cart { get; set; } // trying 
+
         }
         public class UserUpdateDto
         {

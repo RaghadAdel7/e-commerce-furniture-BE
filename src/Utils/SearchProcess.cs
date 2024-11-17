@@ -28,7 +28,7 @@ namespace src.Utils
 
         public int Limit { get; set; }=5;
 
-        public int Offset { get; set; } =0;
+        public int Offset { get; set; }=0;
 
     }
 }

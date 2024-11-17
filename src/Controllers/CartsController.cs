@@ -17,7 +17,7 @@ namespace src.Controller
         {
             _cartService = service;
         }
-        // get all carts: GET api/v1/cart
+        // get all carts: GET api/v1/carts
         [HttpGet]
         public async Task<ActionResult<List<CartReadDto>>> GetAllCarts()
         {
@@ -25,7 +25,7 @@ namespace src.Controller
             return Ok(cartRead);
         }
 
-        //get cart by id: GET api/v1/cart/{id}
+        //get cart by id: GET api/v1/carts/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<CartReadDto>> GetCartById(Guid id)
         {
@@ -33,7 +33,7 @@ namespace src.Controller
             return Ok(cartRead);
         }
 
-        //create new cart: POST api/v1/cart
+        //create new cart: POST api/v1/carts
         [HttpPost]
         public async Task<ActionResult<CartReadDto>> CreateCart([FromBody] CartCreateDto createDto)
         {
@@ -42,7 +42,7 @@ namespace src.Controller
             return CreatedAtAction(nameof(GetCartById), new { id = cartRead.Id }, cartRead);
         }
 
-        //update cart: PUT api/v1/cart/{id}
+        //update cart: PUT api/v1/carts/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<CartReadDto>> UpdateCart(Guid id, CartUpdateDto updateDto)
         {
@@ -50,7 +50,7 @@ namespace src.Controller
             return Ok(cartRead);
         }
 
-        //delete cart: DELETE api/v1/cart/{id}
+        //delete cart: DELETE api/v1/carts/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteCartById(Guid id)
         {

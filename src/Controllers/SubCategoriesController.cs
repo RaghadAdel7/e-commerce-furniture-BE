@@ -9,8 +9,6 @@ using src.Utils;
 using static src.DTO.ProductDTO;
 using static src.DTO.SubCategoryDTO;
 
-// using Microsoft.AspNetCore.Authorization;
-
 namespace src.Controller
 {
     [ApiController]
@@ -82,10 +80,10 @@ namespace src.Controller
         //  View all the products inside subcategories
         [HttpGet("products")]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProductsAsync(
-            [FromQuery] SearchProcess to_search
+            [FromQuery] SearchProcess toSearch
         )
         {
-            var products = await _productService.GetAllAsync(to_search);
+            var products = await _productService.GetAllAsync(toSearch);
             return Ok(products);
         }
 
@@ -93,7 +91,7 @@ namespace src.Controller
         [HttpGet("{subCategoryId}/products")]
         public async Task<ActionResult<List<GetProductDto>>> GetAllProductsInSubcategoryAsync(
             Guid subCategoryId,
-            [FromQuery] SearchProcess to_search
+            [FromQuery] SearchProcess toSearch
         )
         {
             var subCategory = await _subCategoryService.GetSubCategoryByIdAsync(subCategoryId);
@@ -102,7 +100,7 @@ namespace src.Controller
                 throw CustomException.NotFound($"Subcategory with {subCategoryId} not found");
             }
 
-            var products = await _productService.GetAllAsync(to_search,subCategoryId);
+            var products = await _productService.GetAllAsync(toSearch,subCategoryId);
             return Ok(products);
         }
 

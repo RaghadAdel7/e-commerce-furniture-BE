@@ -45,6 +45,21 @@ builder
     .AddScoped<IReviewService, ReviewService>().AddScoped<ReviewRepository, ReviewRepository>()
     .AddScoped<ICouponService, CouponService>().AddScoped<CouponRepository, CouponRepository>();
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name:MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://localhost:3000/",
+                                                  "https://furniture-app-fe.onrender.com/")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod()
+                                                  .SetIsOriginAllowed((host)=> true)
+                                                  .AllowCredentials();
+                          });
+});
+
 builder.Services
 .AddAuthentication(options =>
 {
@@ -103,10 +118,10 @@ using (var scope = app.Services.CreateScope())
 // add middleware 
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
-
-
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
@@ -116,7 +131,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.MapGet("/", ()=> "Hello, world");
 app.UseHttpsRedirection();
 
 app.Run();

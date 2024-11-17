@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace src.DTO
 {
     public class OrderDTO
@@ -43,6 +42,7 @@ namespace src.DTO
             public int PostalCode { get; set; }
             public double CoordinateX { get; set; }
             public double CoordinateY { get; set; }
+
         }
         public class OrderUpdateDTO
         {
