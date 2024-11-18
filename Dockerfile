@@ -5,7 +5,7 @@ EXPOSE 5125
 ENV ASPNETCORE_URLS=http://0.0.0.0:5125
 
 USER app
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build 
+FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build  
 ARG configuration=Release
 WORKDIR /src
 COPY ["Backend.csproj", "./"]
