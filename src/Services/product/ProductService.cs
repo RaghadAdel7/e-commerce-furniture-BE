@@ -56,6 +56,7 @@ namespace src.Services.product
                 ProductName = newProduct.ProductName,
                 ProductColor = newProduct.ProductColor,
                 Description = newProduct.Description,
+                ProductImage = newProduct.ProductImage,
                 SKU = newProduct.SKU,
                 ProductPrice = newProduct.ProductPrice,
                 Weight = newProduct.Weight,
