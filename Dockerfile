@@ -1,11 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
 WORKDIR /app
 EXPOSE 5125
 
 ENV ASPNETCORE_URLS=http://0.0.0.0:5125
 
-USER app
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build 
+FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
 ARG configuration=Release
 WORKDIR /src
 COPY ["Backend.csproj", "./"]
